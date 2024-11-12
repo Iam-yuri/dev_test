@@ -33,12 +33,30 @@ const initializeDatabase = async () => {
 
 initializeDatabase();
 
+//Endpoint para a criação de um novo usuário (alterado)
 app.post('/users', async (req, res) => {
-// Crie o endpoint de users
+  try{
+    const userRepository = AppDataSource.getRepository(User);
+    const newUser = userRepository.create(req.body);
+    const savedUser = await userRepository.save(newUser);
+    res.status(201).json(savedUser);
+  } catch (error){
+    console.error("Error ao criar o usuário:", error);
+    res.status(500).json({ message: "Erro ao criar o usuário" });
+  }
 });
 
+//Endpoint para criar um novo post (alterado)
 app.post('/posts', async (req, res) => {
-// Crie o endpoint de posts
+  try{
+    const postRepository = AppDataSource.getRepository(Post);
+    const newPost = postRepository.create(req.body);
+    const savedPost = await postRepository.save(newPost);
+    res.status(201).json(savedPost);
+  } catch (error){
+    console.error("Erro ao criar o post:", error);
+    res.status(500).json({ message: "Erro ao criar o post" });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
