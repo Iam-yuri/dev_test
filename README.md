@@ -12,7 +12,7 @@
 # Estruturação do projeto
 
 ```
-NomeDoProjeto/
+dev_test/
 ├── node_modules/                    
 ├── src/                             
 │   ├── entity/                      
